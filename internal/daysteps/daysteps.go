@@ -11,7 +11,7 @@ import (
 type DaySteps struct {
 	Steps int //количество шагов
 	Duration time.Duration //длительность прогулки
-	personaldata.Personal //структура Personal
+	personaldata.Personal //структура 
 }
 
 func (ds *DaySteps) Parse(datastring string) (err error) {

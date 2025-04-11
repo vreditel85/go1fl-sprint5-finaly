@@ -20,7 +20,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	if len(dataSlise) != 3 {
 		return fmt.Errorf("invalid data")
 	}
-	// выделяем шаги
+	// выделяем шаги.
 	steps, err := strconv.Atoi(dataSlise[0])
 	if err != nil {
 		return fmt.Errorf("conversion steps error: %w", err)

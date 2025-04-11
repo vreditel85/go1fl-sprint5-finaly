@@ -4,9 +4,9 @@ import (
 	"fmt"
 )
 type Personal struct {
-	Name string //имя пользователя
-	Weight float64 //вес пользователя
-	Height float64 // рост пользователя
+	Name string //имя 
+	Weight float64 //вес 
+	Height float64 // рост
 }
 
 func (p Personal) Print() {

@@ -25,7 +25,7 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 	durationInMinutes := duration.Minutes()
 	return ((weight * meanSpeed * durationInMinutes) / minInH) * walkingCaloriesCoefficient, nil
 }
-//количество калорий для бега
+//количество калорий для бега.
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	var err error
 	if steps <= 0 {
