@@ -10,5 +10,5 @@ type Personal struct {
 }
 
 func (p Personal) Print() {
-	fmt.Sprintf("Имя: %s\nВес: %1.f\nРост: %1.f\n", p.Name, p.Weight, p.Height)
+	fmt.Sprintf("Имя: %s Вес: %d Рост: %1.f", p.Name, int(p.Weight), p.Height)
 }
