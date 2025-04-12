@@ -10,14 +10,14 @@ type Personal struct {
 }
 
 func (p Personal) Print() {
-	if len(p.Name) <= 0 {
-		fmt.Sprintf("no Name: %s", p.Name)
-	}
-	if p.Weight <= 0 {
-		fmt.Sprintf("no Weight: %2.f", p.Weight)
-	}
-	if p.Height <= 0 {
-		fmt.Sprintf("no Height: %2.f", p.Height)
-	}
-	fmt.Sprintf("Имя: %s Вес: %d Рост: %d", p.Name, int(p.Weight), int(p.Height))
+	//if len(p.Name) <= 0 {
+	//	fmt.Sprintf("no Name: %s", p.Name)
+	//}
+	//if p.Weight <= 0 {
+	//	fmt.Sprintf("no Weight: %2.f", p.Weight)
+	//}
+	//if p.Height <= 0 {
+	//	fmt.Sprintf("no Height: %2.f", p.Height)
+	//}
+	fmt.Sprintf("Имя: %s\nВес: %2.f кг.\nРост: %2.f м.\n\n", p.Name, p.Weight, p.Height)
 }
