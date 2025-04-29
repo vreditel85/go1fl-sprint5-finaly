@@ -35,6 +35,9 @@ func (t *Training) Parse(datastring string) (err error) {
 	if err != nil {
 		return fmt.Errorf("conversion time error: %w", err)
 	}
+	if duration <= 0 {
+		return fmt.Errorf("%w", err)
+	}
 	t.Duration = duration
 	return nil
 }
@@ -52,10 +55,11 @@ func (t Training) ActionInfo() (string, error) {
 		meanSpeed = spentenergy.MeanSpeed(t.Steps, t.Height, t.Duration)
 		calories, err = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
 	default:
-		return "неизвестный тип тренировки", nil
+		return fmt.Sprint(""), fmt.Errorf("%w", err)
+
 	}
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
-	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f", t.TrainingType, t.Duration.Hours(), distance, meanSpeed, calories), nil
+	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", t.TrainingType, t.Duration.Hours(), distance, meanSpeed, calories), nil
 }

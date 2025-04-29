@@ -20,5 +20,5 @@ func (p Personal) Print() {
 	//if p.Height <= 0 {
 	//	fmt.Sprintf("no Height: %2.f", p.Height)
 	//}
-	fmt.Printf("Имя: %s\nВес: %d кг.\nРост: %d м.\n\n", p.Name, p.Weight, p.Height)
+	fmt.Printf("Имя: %s\nВес: %.2f кг.\nРост: %.2f м.\n\n", p.Name, p.Weight,p.Height)
 }
