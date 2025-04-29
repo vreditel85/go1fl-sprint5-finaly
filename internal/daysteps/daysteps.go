@@ -2,10 +2,8 @@ package daysteps
 
 import (
 	"fmt"
-	//"github.com/Yandex-Practicum/tracker/internal/personaldata"
-	"internal/personaldata"
-	//"github.com/Yandex-Practicum/tracker/internal/spentenergy"
-	"internal/spentenergy"
+	"github.com/Yandex-Practicum/internal/personaldata"
+	"github.com/Yandex-Practicum/internal/spentenergy"
 	"strconv"
 	"strings"
 	"time"

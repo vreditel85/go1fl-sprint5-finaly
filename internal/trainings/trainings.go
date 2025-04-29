@@ -2,8 +2,8 @@ package trainings
 
 import (
 	"fmt"
-	"internal/personaldata"
-	"internal/spentenergy"
+	"github.com/Yandex-Practicum/internal/personaldata"
+	"github.com/Yandex-Practicum/internal/spentenergy"
 	"strconv"
 	"strings"
 	"time"
