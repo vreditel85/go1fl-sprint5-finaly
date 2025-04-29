@@ -21,11 +21,17 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 	if duration <= 0 {
 		return 0, fmt.Errorf("no duration: %w", err)
 	}
+	if weight <= 0 {
+		return 0, fmt.Errorf("no weight: %w", err)
+	}
+	if height <= 0 {
+		return 0, fmt.Errorf("no height: %w", err)
+	}
 	meanSpeed := MeanSpeed(steps, height, duration)
 	durationInMinutes := duration.Minutes()
 	return ((weight * meanSpeed * durationInMinutes) / minInH) * walkingCaloriesCoefficient, nil
 }
-//количество калорий для бега
+//количество калорий для бега.
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	var err error
 	if steps <= 0 {
@@ -33,6 +39,12 @@ func RunningSpentCalories(steps int, weight, height float64, duration time.Durat
 	}
 	if duration <= 0 {
 		return 0, fmt.Errorf("no duration: %w", err)
+	}
+	if weight <= 0 {
+		return 0, fmt.Errorf("no weight: %w", err)
+	}
+	if height <= 0 {
+		return 0, fmt.Errorf("no height: %w", err)
 	}
 	meanSpeed := MeanSpeed(steps, height, duration)
 	durationInMinutes := duration.Minutes()
@@ -43,12 +55,18 @@ func MeanSpeed(steps int, height float64, duration time.Duration) float64 {
 	if duration <= 0 || steps <= 0 {
 		return 0
 	}
+	if height <= 0 {
+		return 0
+	}
 	distance := Distance(steps, height)
 	return distance / duration.Hours()
 }
 //расстояние в км
 func Distance(steps int, height float64) float64 {
 	if steps <= 0 {
+		return 0
+	}
+	if height <= 0 {
 		return 0
 	}
 	lengthStep := height * stepLengthCoefficient

@@ -1,18 +1,19 @@
 package trainings
 
-import(
+import (
+	"fmt"
+	"github.com/Yandex-Practicum/internal/personaldata"
+	"github.com/Yandex-Practicum/internal/spentenergy"
+	"strconv"
 	"strings"
 	"time"
-	"fmt"
-	"strconv"
-	"internal/spentenergy"
-	"internal/personaldata"
 )
+
 type Training struct {
-	Steps int //количество шагов
-	TrainingType string //тип тренировки
-	Duration time.Duration //длительность тренировки
-	personaldata.Personal //структура Personal из пакета personaldata
+	Steps                 int           //количество шагов
+	TrainingType          string        //тип тренировки
+	Duration              time.Duration //длительность тренировки
+	personaldata.Personal               //структура
 }
 
 func (t *Training) Parse(datastring string) (err error) {
@@ -20,7 +21,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	if len(dataSlise) != 3 {
 		return fmt.Errorf("invalid data")
 	}
-	// выделяем шаги
+	// выделяем шаги.
 	steps, err := strconv.Atoi(dataSlise[0])
 	if err != nil {
 		return fmt.Errorf("conversion steps error: %w", err)
@@ -33,6 +34,9 @@ func (t *Training) Parse(datastring string) (err error) {
 	duration, err := time.ParseDuration(strings.Replace(dataSlise[2], "h", "h", 1))
 	if err != nil {
 		return fmt.Errorf("conversion time error: %w", err)
+	}
+	if duration <= 0 {
+		return fmt.Errorf("%w", err)
 	}
 	t.Duration = duration
 	return nil
@@ -51,10 +55,11 @@ func (t Training) ActionInfo() (string, error) {
 		meanSpeed = spentenergy.MeanSpeed(t.Steps, t.Height, t.Duration)
 		calories, err = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
 	default:
-		return "неизвестный тип тренировки", nil
+		return fmt.Sprint(""), fmt.Errorf("%w", err)
+
 	}
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
-	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f", t.TrainingType, t.Duration.Hours(), distance, meanSpeed, calories), nil
+	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", t.TrainingType, t.Duration.Hours(), distance, meanSpeed, calories), nil
 }

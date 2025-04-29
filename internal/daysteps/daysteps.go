@@ -2,16 +2,17 @@ package daysteps
 
 import (
 	"fmt"
-	"time"
-	"internal/spentenergy"
-	"internal/personaldata"
+	"github.com/Yandex-Practicum/internal/personaldata"
+	"github.com/Yandex-Practicum/internal/spentenergy"
 	"strconv"
 	"strings"
+	"time"
 )
+
 type DaySteps struct {
-	Steps int //количество шагов
-	Duration time.Duration //длительность прогулки
-	personaldata.Personal //структура Personal
+	Steps                 int           //количество шагов
+	Duration              time.Duration //длительность прогулки
+	personaldata.Personal               //структура
 }
 
 func (ds *DaySteps) Parse(datastring string) (err error) {
@@ -27,14 +28,17 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	if steps <= 0 {
 		return fmt.Errorf("no steps or error in their quantity: %w", err)
 	}
-	ds.Steps = steps	
+	ds.Steps = steps
 	// выделяем время
 	duration, err := time.ParseDuration(strings.Replace(dataSlise[1], "h", "h", 1))
 	if err != nil {
 		return fmt.Errorf("conversion time error: %w", err)
 	}
 	ds.Duration = duration
-	return nil	
+	if ds.Duration <= 0 {
+		return fmt.Errorf("%w", err)
+	}
+	return nil
 }
 
 func (ds DaySteps) ActionInfo() (string, error) {
@@ -44,5 +48,17 @@ func (ds DaySteps) ActionInfo() (string, error) {
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
-	return fmt.Sprintf("Количество шагов: %s\nДистанция составила: %.2f км.\nВы сожгли: %.2f", ds.Steps, distance, calories), nil
+	if ds.Steps <= 0 {
+		return fmt.Sprint(""), err
+	}
+	if ds.Duration <= 0 {
+		return fmt.Sprint(""), err
+	}
+	if ds.Weight <= 0 {
+		return fmt.Sprint(""), err
+	}
+	if ds.Height <= 0 {
+		return fmt.Sprint(""), err
+	}
+	return fmt.Sprintf("Количество шагов: %d.\nДистанция составила %.2f км.\nВы сожгли %.2f ккал.\n", ds.Steps, distance, calories), nil
 }
