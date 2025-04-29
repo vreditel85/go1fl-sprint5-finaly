@@ -1,18 +1,19 @@
 package trainings
 
-import(
+import (
+	"fmt"
+	"personaldata"
+	"spentenergy"
+	"strconv"
 	"strings"
 	"time"
-	"fmt"
-	"strconv"
-	"internal/spentenergy"
-	"internal/personaldata"
 )
+
 type Training struct {
-	Steps int //количество шагов
-	TrainingType string //тип тренировки
-	Duration time.Duration //длительность тренировки
-	personaldata.Personal //структура Personal из пакета personaldata
+	Steps                 int           //количество шагов
+	TrainingType          string        //тип тренировки
+	Duration              time.Duration //длительность тренировки
+	personaldata.Personal               //структура
 }
 
 func (t *Training) Parse(datastring string) (err error) {

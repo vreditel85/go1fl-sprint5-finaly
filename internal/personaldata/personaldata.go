@@ -3,9 +3,10 @@ package personaldata
 import (
 	"fmt"
 )
+
 type Personal struct {
-	Name string //имя 
-	Weight float64 //вес 
+	Name   string  //имя
+	Weight float64 //вес
 	Height float64 // рост
 }
 
@@ -19,5 +20,5 @@ func (p Personal) Print() {
 	//if p.Height <= 0 {
 	//	fmt.Sprintf("no Height: %2.f", p.Height)
 	//}
-	fmt.Sprintf("Имя: %s\nВес: %2.f кг.\nРост: %2.f м.\n\n", p.Name, p.Weight, p.Height)
+	fmt.Printf("Имя: %s\nВес: %d кг.\nРост: %d м.\n\n", p.Name, p.Weight, p.Height)
 }
