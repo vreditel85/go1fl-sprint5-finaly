@@ -2,8 +2,8 @@ package trainings
 
 import (
 	"fmt"
-	"personaldata"
-	"spentenergy"
+	"internal/personaldata"
+	"internal/spentenergy"
 	"strconv"
 	"strings"
 	"time"
